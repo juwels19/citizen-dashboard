@@ -2,9 +2,7 @@ import NavProfileRow from './NavProfileRow';
 import NavHeaderRow from './NavHeaderRow';
 import { Separator } from '../ui/separator';
 
-export type NavContainerProps = {};
-
-export default function NavContainer(props: NavContainerProps) {
+export default function NavContainer() {
   return (
     <div className="flex flex-col dark:bg-black bg-tan rounded-md min-h-full py-4 gap-y-12 px-2 w-72 justify-between">
       <div>
