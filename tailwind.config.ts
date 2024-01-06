@@ -8,25 +8,7 @@ const config = {
     './src/**/*.{ts,tsx}',
   ],
   theme: {
-    colors: {
-      white: '#F9FCFE',
-      tan: '#F7F7F5',
-      black: '#1E2525',
-      grey: {
-        1: '#857F74',
-        2: '#2E3838',
-      },
-      accent: {
-        blue: {
-          1: '#30a8f9',
-          2: '#3888e7',
-        },
-        red: {
-          1: '#f55f50',
-          2: '#ee2925',
-        },
-      },
-    },
+    
     container: {
       center: true,
       padding: '2rem',
@@ -35,6 +17,25 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        white: '#F9FCFE',
+        tan: '#F7F7F5',
+        black: '#1E2525',
+        grey: {
+          1: '#857F74',
+          2: '#2E3838',
+        },
+        accent: {
+          blue: {
+            1: '#30a8f9',
+            2: '#3888e7',
+          },
+          red: {
+            1: '#f55f50',
+            2: '#ee2925',
+          },
+        },
+      },
       keyframes: {
         'accordion-down': {
           from: { height: 0 },

@@ -1,5 +1,5 @@
-import React from 'react';
-import NavContainer from './navigation/NavContainer';
+import React from "react";
+import NavContainer from "./navigation/NavContainer";
 
 export default function MainLayout({
   children,
@@ -11,7 +11,7 @@ export default function MainLayout({
       <div className="flex flex-col">
         <NavContainer />
       </div>
-      <div className="flex flex-col w-full px-8">{children}</div>
+      <div className="flex flex-col w-full px-4">{children}</div>
     </div>
   );
 }

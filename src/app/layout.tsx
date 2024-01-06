@@ -1,16 +1,16 @@
-import type { Metadata } from 'next';
-import { ThemeProvider } from '@/providers/ThemeProvider';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import { cn } from '@/lib/utils';
-import MainLayout from '@/components/MainLayout';
-import { ClerkProvider } from '@clerk/nextjs';
+import type { Metadata } from "next";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { cn } from "@/lib/utils";
+import MainLayout from "@/components/MainLayout";
+import { ClerkProvider } from "@clerk/nextjs";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Citizen Dashboard',
-  description: 'The Citizen Dashboard',
+  title: "Citizen Dashboard",
+  description: "The Citizen Dashboard",
 };
 
 export default function RootLayout({
@@ -19,12 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
+    <html lang="en">
+      <ClerkProvider>
         <body
           className={cn(
             inter.className,
-            'flex flex-col w-screen h-screen px-3 py-3'
+            "flex flex-col w-screen h-screen px-3 py-3"
           )}
         >
           <ThemeProvider
@@ -35,7 +35,7 @@ export default function RootLayout({
             <MainLayout>{children}</MainLayout>
           </ThemeProvider>
         </body>
-      </html>
-    </ClerkProvider>
+      </ClerkProvider>
+    </html>
   );
 }
