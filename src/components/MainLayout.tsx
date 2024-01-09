@@ -7,11 +7,13 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-row min-h-full gap-6">
-      <div className="flex flex-col">
+    <div className="flex gap-6">
+      <div className="basis-1/5 sticky top-0 py-3 px-3 h-screen">
         <NavContainer />
       </div>
-      <div className="flex flex-col w-full px-4">{children}</div>
+      <div className="basis-4/5 py-3 px-3">
+        <div className="flex flex-col w-full overflow-auto">{children}</div>
+      </div>
     </div>
   );
 }

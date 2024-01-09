@@ -1,6 +1,6 @@
-import NavProfileRow from './NavProfileRow';
-import NavHeaderRow from './NavHeaderRow';
-import { Separator } from '../ui/separator';
+import NavProfileRow from "./NavProfileRow";
+import NavHeaderRow from "./NavHeaderRow";
+import { Separator } from "../ui/separator";
 
 export default function NavContainer() {
   return (
@@ -9,7 +9,7 @@ export default function NavContainer() {
         <NavHeaderRow />
       </div>
       <div className="flex flex-col gap-4">
-        <Separator decorative className="mt-2 bg-grey-1 dark:bg-grey-2" />
+        <Separator decorative className="mt-2 bg-gray-300 dark:bg-grey-2" />
         <NavProfileRow />
       </div>
     </div>

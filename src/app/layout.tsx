@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/providers/ThemeProvider";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import MainLayout from "@/components/MainLayout";
 import { ClerkProvider } from "@clerk/nextjs";
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Citizen Dashboard",
@@ -21,12 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider>
-        <body
-          className={cn(
-            inter.className,
-            "flex flex-col w-screen h-screen px-3 py-3"
-          )}
-        >
+        <body className={cn(montserrat.className, "w-screen h-screen")}>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"

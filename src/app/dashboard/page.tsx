@@ -1,6 +1,8 @@
 import DataCardDropArea from "@/components/drag-and-drop/DataCardDropArea";
 import DragDropArea from "@/components/drag-and-drop/DragDropArea";
 import DraggableCard from "@/components/drag-and-drop/DraggableCard";
+import ChartCard from "@/components/metrics/chart-card/ChartCard";
+import KPICard from "@/components/metrics/kpi-card/KPICard";
 import { fetchStatsCanada } from "@/data/statsCanada/fetcher";
 import { FetchStatsCanadaProps } from "@/data/statsCanada/types";
 
@@ -16,7 +18,7 @@ export default async function DashboardPage() {
 
   // This file will probably contain all of the logic to get the required data for the dashboard
   return (
-    <div className="">
+    <div className="flex flex-col gap-4 pb-10">
       <DragDropArea>
         <DataCardDropArea id={1} />
         <DataCardDropArea id={2} />
@@ -25,6 +27,11 @@ export default async function DashboardPage() {
         <DataCardDropArea id={5} />
         <DraggableCard id={1} />
       </DragDropArea>
+
+      <KPICard title="Government Debt:" metric="$40 billion" />
+      <ChartCard lineType="monotone" />
+      <ChartCard lineType="monotone" />
+      <ChartCard lineType="monotone" />
     </div>
   );
 }

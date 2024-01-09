@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { UserButton, useUser, useClerk } from '@clerk/nextjs';
-import NavProfileRowSkeleton from './NavProfileRowSkeleton';
-import { cn } from '@/lib/utils';
+import { UserButton, useUser, useClerk } from "@clerk/nextjs";
+import NavProfileRowSkeleton from "./NavProfileRowSkeleton";
+import { cn } from "@/lib/utils";
 
 export default function NavProfileRow() {
   const { user, isLoaded } = useUser();
@@ -13,7 +13,7 @@ export default function NavProfileRow() {
       <UserButton />
       <div
         id="clerk-target"
-        className={cn('flex flex-col gap-0.25 cursor-pointer')}
+        className={cn("flex flex-col gap-0.25 cursor-pointer")}
         onClick={() => clerk.openUserProfile()}
       >
         <p className="text-xs text-black dark:text-white">{user?.fullName}</p>
