@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const TextMetric: Story = {
   args: {
-    title: "Some metric title",
-    metric: "$50,000",
+    title: "Total Government Debt",
+    metric: "$50,000,000",
   },
 };

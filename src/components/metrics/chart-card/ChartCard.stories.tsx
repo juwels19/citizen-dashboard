@@ -15,6 +15,6 @@ type Story = StoryObj<typeof meta>;
 
 export const ChartMetric: Story = {
   args: {
-    lineType: "linear",
+    lineType: "monotone",
   },
 };
