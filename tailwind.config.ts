@@ -20,7 +20,7 @@ const config = {
       colors: {
         white: '#F9FCFE',
         tan: '#F7F7F5',
-        black: '#1E2525',
+        black: '#212126',
         grey: {
           1: '#857F74',
           2: '#2E3838',

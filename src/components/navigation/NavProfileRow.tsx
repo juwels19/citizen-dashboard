@@ -16,7 +16,7 @@ export default function NavProfileRow() {
         className={cn("flex flex-col gap-0.25 cursor-pointer")}
         onClick={() => clerk.openUserProfile()}
       >
-        <p className="text-xs text-black dark:text-white">{user?.fullName}</p>
+        <p className="text-xs text-white">{user?.fullName}</p>
         <p className="text-xs text-grey-1">
           {user?.primaryEmailAddress?.emailAddress}
         </p>

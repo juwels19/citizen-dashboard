@@ -7,11 +7,11 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex gap-6">
-      <div className="basis-1/5 sticky top-0 py-3 px-3 h-screen">
+    <div className="flex bg-black">
+      <div className="sticky top-0 h-screen">
         <NavContainer />
       </div>
-      <div className="basis-4/5 py-3 px-3">
+      <div className="grow my-3 py-3 px-3 bg-white dark:bg-gray-900 border border-transparent rounded-tl-xl">
         <div className="flex flex-col w-full overflow-auto">{children}</div>
       </div>
     </div>
