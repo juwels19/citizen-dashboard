@@ -13,7 +13,8 @@ export default async function DashboardPage() {
     productId: 36100434,
     coordinate: "1.1.1.1.0.0.0.0.0.0",
   };
-  // const gdpData = await fetchStatsCanada(fetchProps);
+  const gdpData = await fetchStatsCanada(fetchProps);
+  console.log(gdpData);
   // console.log(gdpData[0].object.vectorDataPoint);
 
   // This file will probably contain all of the logic to get the required data for the dashboard

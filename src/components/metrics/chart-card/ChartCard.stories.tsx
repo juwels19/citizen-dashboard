@@ -7,14 +7,21 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
+  // tags: ["autodocs"],
 } satisfies Meta<typeof ChartCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const ChartMetric: Story = {
+export const Default: Story = {
   args: {
     lineType: "monotone",
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    lineType: "monotone",
+    loading: true,
   },
 };

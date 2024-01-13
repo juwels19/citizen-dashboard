@@ -7,13 +7,13 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
+  // tags: ["autodocs"],
 } satisfies Meta<typeof KPICard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const TextMetric: Story = {
+export const Default: Story = {
   args: {
     title: "Total Government Debt",
     metric: "$50,000,000",

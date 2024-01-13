@@ -3,8 +3,11 @@ import type { Preview, ReactRenderer } from "@storybook/react";
 import { withThemeByClassName } from "@storybook/addon-themes";
 
 import { ThemeProvider } from "next-themes";
+import { Montserrat } from "next/font/google";
 
 import "../src/app/globals.css";
+
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 const preview: Preview = {
   parameters: {
@@ -17,11 +20,14 @@ const preview: Preview = {
     },
   },
   decorators: [
-    // (Story) => (
-    //   <ThemeProvider attribute="class" defaultTheme="light">
-    //     <Story />
-    //   </ThemeProvider>
-    // ),
+    (Story) => (
+      // <ThemeProvider attribute="class" defaultTheme="light">
+      <div className={montserrat.className}>
+        <Story />
+      </div>
+
+      // </ThemeProvider>
+    ),
     withThemeByClassName<ReactRenderer>({
       themes: {
         light: "light",

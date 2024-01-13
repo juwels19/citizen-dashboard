@@ -11,7 +11,7 @@ export default function MainLayout({
       <div className="sticky top-0 h-screen">
         <NavContainer />
       </div>
-      <div className="grow my-3 py-3 px-3 bg-white dark:bg-gray-900 border border-transparent rounded-tl-xl">
+      <div className="grow my-3 py-3 px-3 bg-white dark:bg-gray-900 border border-transparent rounded-l-xl">
         <div className="flex flex-col w-full overflow-auto">{children}</div>
       </div>
     </div>
