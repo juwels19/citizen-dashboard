@@ -17,9 +17,9 @@ export default function NavProfileRow() {
         onClick={() => clerk.openUserProfile()}
       >
         <p className="text-xs text-white">{user?.fullName}</p>
-        <p className="text-xs text-grey-1">
+        {/* <p className="text-xs text-grey-1">
           {user?.primaryEmailAddress?.emailAddress}
-        </p>
+        </p> */}
       </div>
     </div>
   ) : (

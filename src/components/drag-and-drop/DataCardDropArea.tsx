@@ -10,7 +10,7 @@ export default function DataCardDropArea({ id }: { id: number }) {
   return (
     <div
       ref={setNodeRef}
-      className="p-4 border border-dashed border-gray-300 dark:border-gray-700 rounded-lg"
+      className="p-4 border border-dashed border-gray-300 dark:border-gray-700 rounded-lg col-span-4"
     >
       {`This is data card drop area ${id}`}
     </div>

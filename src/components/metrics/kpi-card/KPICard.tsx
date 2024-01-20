@@ -10,8 +10,9 @@ export default function KPICard({
   title: string;
   metric: string;
 }) {
+  // w-64 md:w-72 lg:w-80 h-24
   return (
-    <Card className="rounded-xl w-64 md:w-72 lg:w-80 h-24">
+    <Card className="rounded-xl col-span-2 md:col-span-4">
       <div className="flex flex-col justify-center align-middle w-full h-full px-4 gap-2">
         <div className="flex justify-between">
           <p className="text-wrap">{title}</p>

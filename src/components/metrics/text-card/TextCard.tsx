@@ -7,8 +7,9 @@ export default function TextCard({
   title: string;
   content: string;
 }) {
+  // w-64 md:w-72 lg:w-80
   return (
-    <Card className="rounded-xl w-64 md:w-72 lg:w-80 min-h-0">
+    <Card className="rounded-xl col-span-4">
       <CardHeader>
         <CardTitle className="font-bold">{title}</CardTitle>
       </CardHeader>

@@ -34,9 +34,10 @@ export default function ChartCard({
     return <ChartCardSkeleton />;
   }
 
+  //size-64 md:size-72 lg:size-96
   return (
-    <Card className="relative rounded-xl size-96">
-      <div className="absolute flex flex-col justify-center align-middle w-full h-full px-4 py-4">
+    <Card className="h-72 col-span-4 lg:col-span-6 rounded-xl">
+      <div className="flex flex-col justify-center align-middle h-full px-4 py-4">
         <div className="flex flex-col">
           <p className="font-semibold text-2xl sticky">Annual Inflation Rate</p>
           <p>Up 10% since 2019</p>
