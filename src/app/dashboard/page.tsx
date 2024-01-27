@@ -3,7 +3,7 @@ import DragDropArea from "@/components/drag-and-drop/DragDropArea";
 import DraggableCard from "@/components/drag-and-drop/DraggableCard";
 import ChartCard from "@/components/metrics/chart-card/ChartCard";
 import KPICard from "@/components/metrics/kpi-card/KPICard";
-import { fetchStatsCanada } from "@/data/statsCanada/fetcher";
+import { fetchStatsCanadaData } from "@/data/statsCanada/fetcher";
 import { FetchStatsCanadaProps } from "@/data/statsCanada/types";
 import Dashboard from "@/components/dashboard/Dashboard";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
