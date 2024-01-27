@@ -28,7 +28,6 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandShortcut,
 } from "@/components/ui/command";
 import {
   Dialog,
@@ -46,9 +45,8 @@ export default function AddMetricModal() {
   }
 
   const [productId, setProductId] = useState<string | null>(null);
-  const [selectedCoordinates, setSelectedCoordinates] = useState<{
-    [key: string]: boolean;
-  }>({});
+  const [selectedCoordinates, setSelectedCoordinates] = useState<string[]>([]);
+  const [selectAllClicked, setSelectAllClicked] = useState(false);
 
   const { data, isLoading: isCubeLoading } = useSWR<CubeData>(
     () => (productId ? `/api/stats-canada/fetch-cube/${productId}` : null),
@@ -69,15 +67,30 @@ export default function AddMetricModal() {
     setProductId(values.productId);
   };
 
-  const handleItemClick = (coordinate: string) => {
-    const newCoordinates = selectedCoordinates;
-    if (selectedCoordinates[coordinate]) {
-      delete newCoordinates[coordinate];
-    } else {
-      newCoordinates[coordinate] = true;
+  const handleItemClick = (isActive: boolean, coordinate: string) => {
+    if (isActive) {
+      setSelectedCoordinates([...selectedCoordinates, coordinate]);
+      return;
     }
+    setSelectedCoordinates(
+      selectedCoordinates.filter(
+        (oldCoordinate) => oldCoordinate !== coordinate
+      )
+    );
+  };
 
-    setSelectedCoordinates(newCoordinates);
+  const handleSelectAllClick = (isSelected: boolean) => {
+    if (!isSelected) {
+      setSelectedCoordinates([]);
+      setSelectAllClicked(isSelected);
+      return;
+    }
+    if (data)
+      setSelectedCoordinates(
+        data?.coordinates.map((coord) => coord.coordinate)
+      );
+
+    setSelectAllClicked(isSelected);
   };
 
   return (
@@ -87,7 +100,13 @@ export default function AddMetricModal() {
       }}
     >
       <DialogTrigger asChild>
-        <Button className="self-end" onClick={() => fetchCubeForm.reset()}>
+        <Button
+          className="self-end"
+          onClick={() => {
+            fetchCubeForm.reset();
+            setSelectedCoordinates([]);
+          }}
+        >
           Add new data
         </Button>
       </DialogTrigger>
@@ -97,7 +116,7 @@ export default function AddMetricModal() {
             Data Onboarding
           </DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col py-4 gap-8">
+        <div className="flex flex-col py-4 gap-4">
           <Form {...fetchCubeForm}>
             <form onSubmit={fetchCubeForm.handleSubmit(onFetchCubeFormSubmit)}>
               <p className="mb-2">Stats Canada Product ID:</p>
@@ -128,24 +147,39 @@ export default function AddMetricModal() {
             </form>
           </Form>
           {data && (
-            <Command className="rounded-lg border shadow-md">
-              <CommandInput
-                placeholder={`Type in a series name for cube ${data.productId}...`}
-              />
-              <CommandList>
-                <CommandEmpty>No results found.</CommandEmpty>
-                {data.coordinates.map((coordinate, index) => {
-                  return (
-                    <AddMetricCommandItem
-                      key={`coordinate-item-${index}`}
-                      label={`${coordinate.coordinate}: ${coordinate.label}`}
-                      value={coordinate.label}
-                      onSelect={() => handleItemClick(coordinate.coordinate)}
-                    />
-                  );
-                })}
-              </CommandList>
-            </Command>
+            <>
+              <p>Coordinate Selection:</p>
+              <Command className="rounded-lg border shadow-md">
+                <CommandInput
+                  placeholder={`Type in a series name for cube ${data.productId}...`}
+                />
+                <CommandList>
+                  <CommandEmpty>No results found.</CommandEmpty>
+                  <CommandItem
+                    onSelect={() => handleSelectAllClick(!selectAllClicked)}
+                  >
+                    {selectAllClicked ? "Deselect" : "Select"} All
+                  </CommandItem>
+                  {data.coordinates.map((coordinate, index) => {
+                    return (
+                      <AddMetricCommandItem
+                        key={`coordinate-item-${index}`}
+                        label={`${coordinate.coordinate}: ${coordinate.label}`}
+                        value={coordinate.label}
+                        coordinate={coordinate.coordinate}
+                        onSelect={handleItemClick}
+                        isSelected={selectedCoordinates.includes(
+                          coordinate.coordinate
+                        )}
+                      />
+                    );
+                  })}
+                </CommandList>
+              </Command>
+              <Button onClick={() => console.log(selectedCoordinates)}>
+                Add Data
+              </Button>
+            </>
           )}
         </div>
       </DialogContent>

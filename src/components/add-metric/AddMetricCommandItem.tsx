@@ -1,26 +1,26 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import { CommandItem, CommandShortcut } from "@/components/ui/command";
 import { Check } from "lucide-react";
 
 export default function AddMetricCommandItem({
+  coordinate,
   label,
   value,
   onSelect,
+  isSelected,
 }: {
+  coordinate: string;
   label: string;
   value: string;
-  onSelect: () => void;
+  onSelect: (value: boolean, coordinate: string) => void;
+  isSelected?: boolean;
 }) {
-  const [isSelected, setIsSelected] = useState(false);
-
   return (
     <CommandItem
       value={value}
       className="justify-between"
       onSelect={() => {
-        setIsSelected(!isSelected);
-        onSelect();
+        onSelect(!isSelected, coordinate);
       }}
     >
       <span>{label}</span>
