@@ -1,7 +1,8 @@
 // Convert this into all possible options later (only use PID and Coordinate lookups)
 export type StatsCanadaActions =
   | "getDataFromCubePidCoordAndLatestNPeriods"
-  | "getCubeMetadata";
+  | "getCubeMetadata"
+  | "getSeriesInfoFromCubePidCoord";
 
 export type FetchStatsCanadaProps = {
   action: StatsCanadaActions;

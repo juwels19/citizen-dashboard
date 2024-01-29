@@ -5,6 +5,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import MainLayout from "@/components/MainLayout";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <MainLayout>{children}</MainLayout>
+            <Toaster richColors position="top-right" expand={true} />
           </ThemeProvider>
         </body>
       </ClerkProvider>

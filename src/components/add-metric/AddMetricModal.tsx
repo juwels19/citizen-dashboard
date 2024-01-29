@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Loader2 } from "lucide-react";
 
 import { swrFetcher } from "@/lib/utils";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,6 +37,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import AddMetricCommandItem from "./AddMetricCommandItem";
+import { useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 export default function AddMetricModal() {
   interface CubeData {
@@ -44,9 +46,15 @@ export default function AddMetricModal() {
     coordinates: CoordinateType[];
   }
 
+  const { user } = useUser();
+
   const [productId, setProductId] = useState<string | null>(null);
-  const [selectedCoordinates, setSelectedCoordinates] = useState<string[]>([]);
+  const [selectedCoordinates, setSelectedCoordinates] = useState<
+    CoordinateType[]
+  >([]);
   const [selectAllClicked, setSelectAllClicked] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { data, isLoading: isCubeLoading } = useSWR<CubeData>(
     () => (productId ? `/api/stats-canada/fetch-cube/${productId}` : null),
@@ -65,16 +73,17 @@ export default function AddMetricModal() {
     values: z.infer<typeof statsCanadaFetchCubeSchema>
   ) => {
     setProductId(values.productId);
+    setSelectedCoordinates([]);
   };
 
-  const handleItemClick = (isActive: boolean, coordinate: string) => {
+  const handleItemClick = (isActive: boolean, coordinate: CoordinateType) => {
     if (isActive) {
       setSelectedCoordinates([...selectedCoordinates, coordinate]);
       return;
     }
     setSelectedCoordinates(
       selectedCoordinates.filter(
-        (oldCoordinate) => oldCoordinate !== coordinate
+        (oldCoordinate) => oldCoordinate.coordinate !== coordinate.coordinate
       )
     );
   };
@@ -85,17 +94,39 @@ export default function AddMetricModal() {
       setSelectAllClicked(isSelected);
       return;
     }
-    if (data)
-      setSelectedCoordinates(
-        data?.coordinates.map((coord) => coord.coordinate)
-      );
+    if (data) setSelectedCoordinates(data?.coordinates.map((coord) => coord));
 
     setSelectAllClicked(isSelected);
   };
 
+  const addDataClick = async () => {
+    setSubmitting(true);
+    const res = await fetch("/api/stats-canada/metrics/create", {
+      method: "POST",
+      body: JSON.stringify({
+        selectedCoordinates,
+        productId,
+        userId: user ? user.id : null,
+      }),
+    });
+
+    if (!res.ok) {
+      setSubmitting(false);
+      toast.error(res.statusText);
+      return;
+    }
+
+    mutate("/api/stats-canada/metrics/fetch");
+    setSubmitting(false);
+    setIsMenuOpen(false);
+    toast.success("Metric has been added successfully!");
+  };
+
   return (
     <Dialog
+      open={isMenuOpen}
       onOpenChange={() => {
+        setIsMenuOpen(!isMenuOpen);
         setProductId(null);
       }}
     >
@@ -104,6 +135,7 @@ export default function AddMetricModal() {
           className="self-end"
           onClick={() => {
             fetchCubeForm.reset();
+            setIsMenuOpen(true);
             setSelectedCoordinates([]);
           }}
         >
@@ -166,17 +198,16 @@ export default function AddMetricModal() {
                         key={`coordinate-item-${index}`}
                         label={`${coordinate.coordinate}: ${coordinate.label}`}
                         value={coordinate.label}
-                        coordinate={coordinate.coordinate}
+                        coordinate={coordinate}
                         onSelect={handleItemClick}
-                        isSelected={selectedCoordinates.includes(
-                          coordinate.coordinate
-                        )}
+                        isSelected={selectedCoordinates.includes(coordinate)}
                       />
                     );
                   })}
                 </CommandList>
               </Command>
-              <Button onClick={() => console.log(selectedCoordinates)}>
+              <Button onClick={addDataClick} disabled={submitting}>
+                {submitting && <Loader2 className="animate-spin mr-2" />}
                 Add Data
               </Button>
             </>

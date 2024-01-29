@@ -3,7 +3,8 @@ import { headers } from "next/headers";
 import { UserWebhookEvent } from "@clerk/nextjs/server";
 import { DateTime } from "luxon";
 
-import { db, users } from "@/db/drizzle";
+import { db } from "@/db/drizzle";
+import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function POST(req: Request) {
@@ -65,6 +66,7 @@ export async function POST(req: Request) {
   const firstName = evt.data.first_name;
   const lastName = evt.data.last_name;
   const imageUrl = evt.data.image_url;
+  const isAdmin = evt.data.private_metadata.admin ? true : false;
   const createdAt = DateTime.fromMillis(evt.data.created_at).toISO(); // This is an epoch timestamp in milliseconds
   const updatedAt = DateTime.fromMillis(evt.data.updated_at).toISO(); // This is an epoch timestamp in milliseconds
 
@@ -77,6 +79,7 @@ export async function POST(req: Request) {
       firstName,
       lastName,
       imageUrl,
+      isAdmin,
       createdAt,
       updatedAt,
     })
@@ -85,6 +88,7 @@ export async function POST(req: Request) {
         email,
         firstName,
         lastName,
+        isAdmin,
         imageUrl,
         updatedAt,
       },

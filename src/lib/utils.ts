@@ -6,3 +6,15 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const swrFetcher = (...args) => fetch(...args).then((res) => res.json());
+
+export function formatCoordinate(coordinate: string) {
+  const coordinateArr = coordinate.split(".");
+
+  while (coordinateArr.length !== 10) {
+    coordinateArr.push("0");
+  }
+
+  const formattedCoordinate = coordinateArr.join(".");
+
+  return formattedCoordinate;
+}

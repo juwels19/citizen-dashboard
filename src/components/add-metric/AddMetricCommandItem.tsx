@@ -1,6 +1,7 @@
 import React from "react";
 import { CommandItem, CommandShortcut } from "@/components/ui/command";
 import { Check } from "lucide-react";
+import { CoordinateType } from "@/data/statsCanada/types";
 
 export default function AddMetricCommandItem({
   coordinate,
@@ -9,10 +10,10 @@ export default function AddMetricCommandItem({
   onSelect,
   isSelected,
 }: {
-  coordinate: string;
+  coordinate: CoordinateType;
   label: string;
   value: string;
-  onSelect: (value: boolean, coordinate: string) => void;
+  onSelect: (value: boolean, coordinate: CoordinateType) => void;
   isSelected?: boolean;
 }) {
   return (

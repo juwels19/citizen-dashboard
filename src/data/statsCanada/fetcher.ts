@@ -50,3 +50,28 @@ export async function fetchStatsCanadaCube(props: FetchStatsCanadaProps) {
   const body = await res.json();
   return body;
 }
+
+export async function fetchStatsCanadaCoordInfo(props: FetchStatsCanadaProps) {
+  const { productId, coordinate, action, method } = props;
+
+  const res = await fetch(
+    `https://www150.statcan.gc.ca/t1/wds/rest/${action}`,
+    method === "POST"
+      ? {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify([
+            {
+              productId,
+              coordinate,
+            },
+          ]),
+        }
+      : undefined
+  );
+
+  const body = await res.json();
+  return body;
+}
