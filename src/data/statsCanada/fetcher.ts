@@ -1,4 +1,3 @@
-import { z } from "zod";
 import { FetchStatsCanadaProps } from "./types";
 
 export async function fetchStatsCanadaData(props: FetchStatsCanadaProps) {
@@ -23,8 +22,13 @@ export async function fetchStatsCanadaData(props: FetchStatsCanadaProps) {
       : undefined
   );
 
-  const body = await res.json();
-  return body;
+  if (res.ok) {
+    const body = await res.json();
+    return body;
+  }
+
+  console.log(res);
+  throw new Error(res.statusText);
 }
 
 export async function fetchStatsCanadaCube(props: FetchStatsCanadaProps) {

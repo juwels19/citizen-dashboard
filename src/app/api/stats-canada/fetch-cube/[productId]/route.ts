@@ -21,7 +21,6 @@ export async function GET(
 
   const cubeData = (await fetchStatsCanadaCube(fetchProps))[0];
 
-  const fetchStatus = cubeData.status;
   const dimensions = cubeData.object.dimension;
 
   const arrayOfMembers = [];
